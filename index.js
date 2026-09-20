@@ -34,9 +34,14 @@ function createBot() {
 
 // Запуск веб-сервера для поддержки активности хостинга
 const http = require('http');
-http.createServer((req, res) => {
-  res.write("Бот работает!");
-  res.end();
-}).listen(8080);
+const PORT = process.env.PORT || 8080; // Render сам передаст нужный порт, а если нет — включится 8080
 
+http.createServer((req, res) => {
+    res.write("Бот работает!");
+    res.end();
+}).listen(PORT, () => {
+    console.log(`Веб-сервер успешно запущен на порту ${PORT}`);
+});
+
+// Не забудьте вызвать функцию создания бота, если она не вызывается автоматически ниже в коде
 createBot();
